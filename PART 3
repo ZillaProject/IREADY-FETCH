@@ -1,0 +1,7 @@
+window.p1 = (score) => {  //skip function.
+    bypassDebugger(); //bypasses the debugger again because it's removed later.
+    undebug(lessonBridge.pause); //undebug the pause function just to be safe.
+    q6C.completeLessonComponent(getCsid(), { score : score }); // sends the skip request to the server.
+    frame.eval = oldEval; // adds eval back to the iframe.
+    eval = oldEval; // adds eval back to the window.
+};
