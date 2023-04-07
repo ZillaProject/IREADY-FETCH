@@ -1,0 +1,1 @@
+debug(lessonBridge.pause), lessonBridge.pause(); // exposes the 'q6C' variable.
