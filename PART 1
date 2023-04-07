@@ -1,0 +1,21 @@
+//part 1
+let frame = html5Iframe.contentWindow; // lesson iframe.
+let getCsid = () => { return html5Iframe.src.split('csid=')[1].split('&type')[0]; }; // lesson csid.
+let oldEval = eval; // old eval that way it can be replaced.
+let bypassDebugger = () => { // function that bypasses debugger.
+    frame.eval = function () {}; //removes eval from the iframe.
+    eval = function () {}; //removes eval from the window.
+};
+bypassDebugger(); // bypass debugger before opening it again.
+
+//part 2
+debug(lessonBridge.pause), lessonBridge.pause(); // exposes the 'q6C' variable.
+
+//part 3
+window.p1 = (score) => {  //skip function.
+    bypassDebugger(); //bypasses the debugger again because it's removed later.
+    undebug(lessonBridge.pause); //undebug the pause function just to be safe.
+    q6C.completeLessonComponent(getCsid(), { score : score }); // sends the skip request to the server.
+    frame.eval = oldEval; // adds eval back to the iframe.
+    eval = oldEval; // adds eval back to the window.
+};
